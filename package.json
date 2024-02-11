@@ -43,7 +43,7 @@
     "entities": "^4.5.0",
     "image-size": "^1.1.1",
     "p-queue": "^6.6.2",
-    "sharp": "^0.33.2"
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
