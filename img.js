@@ -31,6 +31,7 @@ const globalOptions = {
   sharpPngOptions: {}, // options passed to the Sharp png output method
   sharpJpegOptions: {}, // options passed to the Sharp jpeg output method
   sharpAvifOptions: {}, // options passed to the Sharp avif output method
+  sharpHook: null,
   extensions: {},
   formatHooks: {
     svg: svgHook,
@@ -558,6 +559,11 @@ class Image {
         }
 
         let sharpInstance = sharpImage.clone();
+
+        if (typeof this.options.sharpHook === "function") {
+          sharpInstance = this.options.sharpHook(sharpInstance);
+        }
+
         // Output images do not include orientation metadata (https://github.com/11ty/eleventy-img/issues/52)
         // Use sharp.rotate to bake orientation into the image (https://github.com/lovell/sharp/blob/v0.32.6/docs/api-operation.md#rotate):
         // > If no angle is provided, it is determined from the EXIF data. Mirroring is supported and may infer the use of a flip operation.
